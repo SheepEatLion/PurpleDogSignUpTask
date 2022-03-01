@@ -15,10 +15,10 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
 

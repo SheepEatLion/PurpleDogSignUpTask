@@ -16,10 +16,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user")
-    public void signUp(@RequestBody SignUpReq signUpReq){
+    public String signUp(@RequestBody SignUpReq signUpReq){
+        String resultMsg;
+        resultMsg = userService.signUp(signUpReq);
 
-        userService.signUp(signUpReq);
-
+        return resultMsg;
     }
 
 }
