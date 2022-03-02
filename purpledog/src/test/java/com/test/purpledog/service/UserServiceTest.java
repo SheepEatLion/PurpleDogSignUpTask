@@ -53,4 +53,17 @@ class UserServiceTest {
         // then
         assertEquals(userList.size(), 2);
     }
+
+    @Test
+    void findUserById() {
+        // given
+        SignUpReq user = new SignUpReq("id1", "pw1");
+
+        // when
+        String id = userService.signUp(user);
+        User foundUser = userService.findUserById(id);
+
+        // then
+        assertEquals(foundUser.getId(), id);
+    }
 }

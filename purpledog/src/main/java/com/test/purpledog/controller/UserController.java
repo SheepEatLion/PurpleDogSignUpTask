@@ -23,8 +23,13 @@ public class UserController {
         return resultMsg;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public List<User> users(){
         return userService.findUsers();
+    }
+
+    @GetMapping("/user/{id}")
+    public User userById(@PathVariable String id){
+        return userService.findUserById(id);
     }
 }

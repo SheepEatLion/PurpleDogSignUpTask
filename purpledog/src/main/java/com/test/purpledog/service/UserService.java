@@ -47,6 +47,16 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User findUserById(String id){
+        User foundUser;
+        Optional<User> optUser = userRepository.findById(id);
+        if(optUser.isPresent()){
+            foundUser = optUser.get();
+        } else {
+            throw new ServiceException("찾고자 하는 회원은 없는 회원입니다.");
+        }
+        return foundUser;
+    }
 
     private void validateDuplicateUser(User user){
         Optional<User> optUser = userRepository.findById(user.getId());
