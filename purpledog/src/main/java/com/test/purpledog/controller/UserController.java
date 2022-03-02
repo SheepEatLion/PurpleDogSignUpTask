@@ -32,4 +32,9 @@ public class UserController {
     public User userById(@PathVariable String id){
         return userService.findUserById(id);
     }
+
+    @PostMapping("/pwd-change")
+    public User changePwd(@RequestBody String id, @RequestBody String password){
+        return userService.changePwd(id, password);
+    }
 }

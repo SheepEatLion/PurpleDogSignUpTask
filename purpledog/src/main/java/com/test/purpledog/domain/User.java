@@ -34,4 +34,8 @@ public class User {
         this.password = password;
     }
 
+    public User update(String password){
+        this.password = password;
+        return this;
+    }
 }

@@ -66,4 +66,18 @@ class UserServiceTest {
         // then
         assertEquals(foundUser.getId(), id);
     }
+
+    @Test
+    void changePassword(){
+        // given
+        SignUpReq user = new SignUpReq("id1", "pw1");
+
+        // when
+        String id = userService.signUp(user);
+        User foundUser = userService.findUserById(id);
+        User changedUser = userService.changePwd("id1", "password1");
+
+        // then
+        assertEquals(foundUser, changedUser);
+    }
 }

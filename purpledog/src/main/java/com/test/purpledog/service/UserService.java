@@ -58,6 +58,16 @@ public class UserService {
         return foundUser;
     }
 
+    public User changePwd(String id, String password){
+        Optional<User> optUser = userRepository.findById(id);
+        if(optUser.isPresent()){
+            optUser.get().update(password);
+        } else {
+            throw new ServiceException("없는 아이디입니다.");
+        }
+        return optUser.get();
+    }
+
     private void validateDuplicateUser(User user){
         Optional<User> optUser = userRepository.findById(user.getId());
         if(optUser.isPresent()){
