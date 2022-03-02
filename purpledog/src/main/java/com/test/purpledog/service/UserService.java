@@ -43,6 +43,11 @@ public class UserService {
         return resultMsg;
     }
 
+    public List<User> findUsers(){
+        return userRepository.findAll();
+    }
+
+
     private void validateDuplicateUser(User user){
         Optional<User> optUser = userRepository.findById(user.getId());
         if(optUser.isPresent()){
