@@ -80,4 +80,21 @@ class UserServiceTest {
         // then
         assertEquals(foundUser, changedUser);
     }
+
+    @Test
+    void deleteUser(){
+        // given
+        SignUpReq user = new SignUpReq("id1", "pw1");
+        SignUpReq user2 = new SignUpReq("id2", "pw2");
+
+        // when
+        String id = userService.signUp(user);
+        String id2 = userService.signUp(user2);
+        userService.deleteUser(id);
+        List<User> userList = userService.findUsers();
+
+        // then
+        assertEquals(userList.get(0).getId(), id2);
+
+    }
 }

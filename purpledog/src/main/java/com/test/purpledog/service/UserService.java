@@ -68,6 +68,15 @@ public class UserService {
         return optUser.get();
     }
 
+    public String deleteUser(String id){
+        try {
+            userRepository.deleteById(id);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return id + "는 삭제되었습니다.";
+    }
+
     private void validateDuplicateUser(User user){
         Optional<User> optUser = userRepository.findById(user.getId());
         if(optUser.isPresent()){

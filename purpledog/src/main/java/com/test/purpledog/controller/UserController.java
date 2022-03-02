@@ -37,4 +37,9 @@ public class UserController {
     public User changePwd(@RequestBody String id, @RequestBody String password){
         return userService.changePwd(id, password);
     }
+
+    @GetMapping("/user-delete/{id}")
+    public String userDelete(@PathVariable String id){
+        return userService.deleteUser(id);
+    }
 }
