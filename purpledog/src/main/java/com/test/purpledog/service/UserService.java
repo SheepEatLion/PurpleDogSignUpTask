@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -20,19 +23,13 @@ public class UserService {
 
         String resultMsg;
         try {
-            if(signUpReq.getId().isEmpty() || signUpReq.getPassword().isEmpty()){
-                throw new ServiceException("아이디 또는 비밀번호가 빈 값으로 입력되었습니다.");
-            }
-            if(signUpReq.getId() == null || signUpReq.getPassword() == null){
-                throw new ServiceException("아이디 또는 비밀번호가 Null 입니다.");
-            }
-            if(userRepository.findById(signUpReq.getId()).isPresent()){
-                throw new ServiceException("이미 존재하는 아이디입니다.");
-            }
             User user = User.builder()
                     .id(signUpReq.getId())
                     .password(signUpReq.getPassword())
                     .build();
+
+            validateDuplicateUser(user);
+            validateEmptyUser(user);
 
             userRepository.save(user);
             resultMsg = user.getId();
@@ -44,5 +41,17 @@ public class UserService {
         }
 
         return resultMsg;
+    }
+
+    private void validateDuplicateUser(User user){
+        Optional<User> optUser = userRepository.findById(user.getId());
+        if(optUser.isPresent()){
+            throw new ServiceException("이미 존재하는 아이디입니다.");
+        }
+    }
+    private void validateEmptyUser(User user){
+        if(user.getId().isEmpty() || user.getPassword().isEmpty()){
+            throw new ServiceException("아이디 또는 비밀번호가 빈 값으로 입력되었습니다.");
+        }
     }
 }
