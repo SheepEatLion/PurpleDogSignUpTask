@@ -21,7 +21,13 @@ public class UserService {
         String resultMsg;
         try {
             if(signUpReq.getId().isEmpty() || signUpReq.getPassword().isEmpty()){
-                throw new ServiceException("column of user entity can not be null.");
+                throw new ServiceException("아이디 또는 비밀번호가 빈 값으로 입력되었습니다.");
+            }
+            if(signUpReq.getId() == null || signUpReq.getPassword() == null){
+                throw new ServiceException("아이디 또는 비밀번호가 Null 입니다.");
+            }
+            if(userRepository.findById(signUpReq.getId()).isPresent()){
+                throw new ServiceException("이미 존재하는 아이디입니다.");
             }
             User user = User.builder()
                     .id(signUpReq.getId())
