@@ -21,3 +21,11 @@
 - - -
  
 **회원 테이블 Create Query**
+
+create table user (<br>
+    id varchar(255) not null, <br>
+    password varchar(255) not null, <br>
+    primary key (id) <br>
+)
+
+***h2 db 를 사용하고 auto create 가 적용되어 있어, create query 를 칠 필요는 없습니다.***
